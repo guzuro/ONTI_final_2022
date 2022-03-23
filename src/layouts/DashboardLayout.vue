@@ -4,25 +4,27 @@
             <div class="logo"/>
             <a-menu mode="inline" :default-selected-keys="activeKey" :default-open-keys="activeGroup">
                 <template v-for="item in navItems">
-                    <a-menu-item v-if="!item.children" :key="item.path" @click="navigateTo(item.path)">
-                        <a-icon :type="item.icon"/>
-                        <span>{{ item.name }}</span>
-                    </a-menu-item>
+                    <template v-if="item.isVisible()">
+                        <a-menu-item v-if="!item.children" :key="item.path" @click="navigateTo(item.path)">
+                            <a-icon :type="item.icon"/>
+                            <span>{{ item.name }}</span>
+                        </a-menu-item>
 
-                    <a-sub-menu v-else :key="item.guid">
+                        <a-sub-menu v-else :key="item.guid">
             <span slot="title">
               <a-icon :type="item.icon"/>
               <span>{{ item.name }} </span>
             </span>
-                        <a-menu-item v-for="menuChildren in item.children"
-                                     :key="menuChildren.path"
-                                     @click="navigateTo(menuChildren.path)">
-                            <a-icon :type="menuChildren.icon"/>
-                            <span>
+                            <a-menu-item v-for="menuChildren in item.children"
+                                         :key="menuChildren.path"
+                                         @click="navigateTo(menuChildren.path)">
+                                <a-icon :type="menuChildren.icon"/>
+                                <span>
                 {{ menuChildren.name }}
               </span>
-                        </a-menu-item>
-                    </a-sub-menu>
+                            </a-menu-item>
+                        </a-sub-menu>
+                    </template>
                 </template>
                 <a-menu-item @click="doLogout()">
                     <a-icon type="close"/>

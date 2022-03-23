@@ -14,12 +14,7 @@
                         </a-list-item-meta>
                     </a-list-item>
                     <a-list-item>
-                        <a-list-item-meta :description="user.phone">
-                            <div slot="title">Номер телефона</div>
-                        </a-list-item-meta>
-                    </a-list-item>
-                    <a-list-item>
-                        <a-list-item-meta :description="user.role">
+                        <a-list-item-meta :description="rolesOptions.find(o => o.value === user.role).label">
                             <div slot="title">Должность</div>
                         </a-list-item-meta>
                     </a-list-item>
@@ -30,12 +25,19 @@
 </template>
 
 <script>
+    import RolesService from "../Services/RolesService";
+
     export default {
         name: "dashboard",
         data() {
             return {
-                user: {...this.$store.state.user}
+                user: {...this.$store.state.user},
+                rolesOptions: []
             }
+        },
+        created() {
+            RolesService.getRolesOptions(this.$store.state.user.company_guid)
+                .then(res => this.rolesOptions = res)
         }
     }
 </script>

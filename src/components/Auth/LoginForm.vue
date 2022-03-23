@@ -20,7 +20,7 @@
                     <ValidationProvider
                             name="Password"
                             immediate
-                            rules="required|min:7"
+                            rules="required|min:1"
                             v-slot="{ errors }"
                     >
                         <a-input

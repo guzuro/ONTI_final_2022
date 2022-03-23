@@ -12,25 +12,18 @@
                 <span class="text-red-900"> {{ errors[0] }} </span>
             </field-wrapper>
         </ValidationProvider>
-        <ValidationProvider name="Фамилия" immediate rules="required" v-slot="{ errors }">
-            <field-wrapper class="mt-5" :fieldTitle="'Фамилия'">
-                <a-input placeholder="Фамилия" type="text" v-model="value.last_name"></a-input>
-                <span class="text-red-900"> {{ errors[0] }} </span>
-            </field-wrapper>
-        </ValidationProvider>
         <ValidationProvider name="Имя" immediate rules="required" v-slot="{ errors }">
             <field-wrapper class="mt-5" :fieldTitle="'Имя'">
                 <a-input placeholder="Имя" type="text" v-model="value.first_name"></a-input>
                 <span class="text-red-900"> {{ errors[0] }} </span>
             </field-wrapper>
         </ValidationProvider>
-        <ValidationProvider name="Номер телефона" immediate rules="required" v-slot="{ errors }">
-            <field-wrapper :fieldTitle="'Номер телефона'" class="mt-5">
-                <a-input placeholder="Номер телефона" type="text" v-model="value.phone"></a-input>
+        <ValidationProvider name="Фамилия" immediate rules="required" v-slot="{ errors }">
+            <field-wrapper class="mt-5" :fieldTitle="'Фамилия'">
+                <a-input placeholder="Фамилия" type="text" v-model="value.last_name"></a-input>
                 <span class="text-red-900"> {{ errors[0] }} </span>
             </field-wrapper>
         </ValidationProvider>
-
     </div>
 </template>
 

@@ -10,6 +10,7 @@ export default {
                                 userId: this.$store.state.user.uid.toString(),
                             },
                         }).href,
+                        isVisible: () => true,
                         name: 'Dashboard',
                         icon: 'appstore',
                     },
@@ -20,9 +21,36 @@ export default {
                                 userId: this.$store.state.user.uid.toString(),
                             },
                         }).href,
+                        isVisible: () => this.$store.state.user.role === '9hKaI9LIi83WYIcwiyR7',
                         name: 'Сотрудники',
                         icon: 'team',
                     },
+                    {
+                        name: "Справочники",
+                        isVisible: () => this.$store.state.user.role === '9hKaI9LIi83WYIcwiyR7',
+                        guid: '1',
+                        children: [
+                            {
+                                name: "Категории сотрудников",
+                                path: this.$router.resolve({
+                                    name: 'Roles',
+                                    params: {
+                                        userId: this.$store.state.user.uid.toString(),
+                                    },
+                                }).href,
+                            },
+                            {
+                                name: 'Типы задач',
+                                path: this.$router.resolve({
+                                    name: 'TaskTypes',
+                                    params: {
+                                        userId: this.$store.state.user.uid.toString(),
+                                    },
+                                }).href,
+                            },
+                        ]
+                    },
+
                     // {
                     //     name: 'Основная информация',
                     //     icon: 'idcard',

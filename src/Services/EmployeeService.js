@@ -22,4 +22,16 @@ export default class EmployeeService {
         })
     }
 
+    static async deleteEmployee(uid) {
+        return new Promise((resolve, reject) => {
+            firebase
+                .firestore()
+                .collection('users')
+                .doc(uid)
+                .delete()
+                .then(resolve)
+                .catch(reject)
+        })
+    }
+
 }

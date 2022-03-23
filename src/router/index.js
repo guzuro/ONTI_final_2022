@@ -24,6 +24,16 @@ const routes = [
                 component: () => import('../views/employee-list'),
                 path: '/office/:userId/employees/',
                 name: 'Employees',
+            },
+            {
+                component: () => import('../views/roles-list'),
+                path: '/office/:userId/roles/',
+                name: 'Roles',
+            },
+            {
+                component: () => import('../views/task-types'),
+                path: '/office/:userId/taskTypes/',
+                name: 'TaskTypes',
             }
         ],
     },

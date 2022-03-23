@@ -1,5 +1,5 @@
 <template>
-    <div class="employee-list" v-if="this.$store.state.user">
+    <div class="employee-list" v-if="this.$store.state.user && isMounted">
         <h1>Сотрудники</h1>
         <div class="flex justify-end">
             <a-button @click="employeeModalActive = true">
@@ -10,16 +10,14 @@
         <a-table class="mt-5"
                  :columns="columns"
                  :data-source="employees"
+                 :row-key="record => record.uid"
         >
-            <a slot="last_name" slot-scope="last_name">{{ last_name }}</a>
-            <a slot="first_name" slot-scope="first_name">{{ first_name }}</a>
-            <a slot="role" slot-scope="role">{{ role }}</a>
+            <template slot="role" slot-scope="role"> {{ rolesOptions.find(o => o.value === role).label }}</template>
 
             <span slot="action"
                   slot-scope="record"
             >
                 <a @click="removeEmployee(record)">Delete</a>
-                <a @click="editEmployee(record)">Edit</a>
             </span>
         </a-table>
 
@@ -30,17 +28,12 @@
             <field-wrapper
                     class="mt-2"
                     field-title="Должность">
-                <a-select default-value="Менеджер"
-                          v-model="employee.role"
+                <a-select v-model="employee.role"
                 >
-                    <a-select-option value="Администратор">
-                        Администратор
-                    </a-select-option>
-                    <a-select-option value="Менеджер">
-                        Менеджер
-                    </a-select-option>
-                    <a-select-option value="Кладовщик">
-                        Кладовщик
+                    <a-select-option v-for="(role, index) in rolesOptions"
+                                     :key="index"
+                                     :value="role.value">
+                        {{role.label}}
                     </a-select-option>
                 </a-select>
             </field-wrapper>
@@ -54,6 +47,7 @@
     import FieldWrapper from "../components/FieldWrapper";
     import AuthService from "../Services/AuthService";
     import EmployeeService from "../Services/EmployeeService";
+    import RolesService from "../Services/RolesService";
 
     const columns = [
         {
@@ -70,6 +64,7 @@
             title: 'Должность',
             dataIndex: 'role',
             key: 'role',
+            scopedSlots: {customRender: 'role'}
         },
         {
             title: 'Действия',
@@ -86,6 +81,7 @@
         },
         data() {
             return {
+                isMounted: false,
                 columns,
                 employees: [],
                 employeeModalActive: false,
@@ -97,7 +93,8 @@
                     phone: '',
                     role: '',
                     company_guid: this.$store.state.user.company_guid
-                }
+                },
+                rolesOptions: []
             }
         },
         methods: {
@@ -113,14 +110,23 @@
                     })
             },
             removeEmployee(employee) {
-                console.log(employee)
+                EmployeeService.deleteEmployee(employee.uid)
+                    .then(this.getEmployees)
             },
-            editEmployee(employee) {
-                console.log(employee)
+            getRoles() {
+                RolesService.getRolesOptions(this.$store.state.user.company_guid)
+                    .then(res => this.rolesOptions = res)
             }
         },
+        getOwnerLabel(value) {
+            return this.rolesOptions.find(o => o.value === value).label
+        },
         created() {
+            this.getRoles()
             this.getEmployees()
+        },
+        mounted() {
+            this.isMounted = true
         }
     }
 </script>
