@@ -1,0 +1,70 @@
+<template>
+    <div class="auth">
+        <div class="auth-wrapper">
+            <div class="auth-right__content px-5">
+                <component :is="currentForm[form].view"/>
+            </div>
+            <div class="text-center">
+                <p>
+                    Уже есть аккаунт?
+                    <span
+                            @click="form = 'login'"
+                            class="auth-change-view is-uppercase font-bold cursor-pointer"
+                    >Войти</span
+                    >
+                </p>
+                <hr/>
+                <p
+                        @click="form = 'registration'"
+                        class="auth-change-view is-uppercase font-bold cursor-pointer"
+                >
+                    Регистрация
+                </p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                form: 'login',
+                currentForm: {
+                    login: {
+                        view: () => import('../components/Auth/LoginForm.vue'),
+                    },
+                    registration: {
+                        view: () => import('../components/Auth/RegistrationForm.vue'),
+                    },
+                }
+            }
+        },
+
+
+    }
+</script>
+
+<style lang="scss">
+    .auth {
+        background-image: url('../assets/images/login-right.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+
+        &-wrapper {
+            width: 100%;
+            margin: 0 auto;
+            max-width: 933px;
+            padding: 10px;
+
+            background-color: white;
+        }
+
+        .auth-change-view {
+            &:hover {
+                color: hsl(204, 86%, 53%);
+            }
+        }
+    }
+</style>
