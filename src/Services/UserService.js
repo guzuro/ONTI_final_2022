@@ -29,4 +29,37 @@ export default class UserService {
                 .catch(reject)
         })
     }
+
+
+    static async setTaskToUser(user_uid, task) {
+        return new Promise((resolve, reject) => {
+            firebase
+                .firestore()
+                .collection('users')
+                .doc(user_uid)
+                .collection('task')
+                .doc(task.id)
+                .set(task)
+                .then(resolve)
+                .catch(reject)
+        })
+    }
+
+    static async getTasksInWork(user_uid) {
+        return new Promise((resolve, reject) => {
+            firebase
+                .firestore()
+                .collection('users')
+                .doc(user_uid)
+                .collection('task')
+                .get()
+                .then((response) => {
+                    const tasks = response.docs.map(r => r.data())
+                    resolve(tasks)
+                })
+                .catch(reject)
+        })
+
+    }
+
 }

@@ -18,12 +18,12 @@ extend('min', min);
 Vue.use(Antd);
 
 const firebaseConfig = {
-  apiKey: "AIzaSyABZscROMKz92lTIw9y48vXdBR5ApAWTcs",
-  authDomain: "nti-final-f94a0.firebaseapp.com",
-  projectId: "nti-final-f94a0",
-  storageBucket: "nti-final-f94a0.appspot.com",
-  messagingSenderId: "331434596838",
-  appId: "1:331434596838:web:b0d28824cdfc6464ce9e27"
+  apiKey: "*",
+  authDomain: "*",
+  projectId: "*",
+  storageBucket: "*",
+  messagingSenderId: "*",
+  appId: "*"
 };
 
 firebase.initializeApp(firebaseConfig);

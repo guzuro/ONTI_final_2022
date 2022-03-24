@@ -44,6 +44,16 @@ const routes = [
                 component: () => import('../views/tasks'),
                 path: '/office/:userId/tasks/',
                 name: 'Tasks',
+            },
+            {
+                component: () => import('../views/role-tasks'),
+                path: '/office/:userId/role-tasks/',
+                name: 'RoleTasks',
+            },
+            {
+                component: () => import('../views/in-work-tasks'),
+                path: '/office/:userId/in-work/',
+                name: 'InWorkTasks',
             }
         ],
     },

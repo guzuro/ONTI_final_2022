@@ -31,6 +31,7 @@
                     id: uuidv4().split('-')[0],
                     taskType: [],
                     description: '',
+                    executor: null
                 },
                 tasksTypes: []
             }
@@ -46,6 +47,7 @@
                             id: uuidv4().split('-')[0],
                             taskType: [],
                             description: '',
+                            executor: null
                         }
                         this.$message.info('Успешно');
 

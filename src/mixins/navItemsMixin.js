@@ -1,3 +1,5 @@
+import {ADMIN, DISPETCHER} from "./CONSTANTS";
+
 export default {
     computed: {
         navItems() {
@@ -69,6 +71,26 @@ export default {
                                 }).href,
                             },
                         ]
+                    },
+                    {
+                        name: 'Все задачи',
+                        isVisible: () => this.$store.state.user.role !== ADMIN && this.$store.state.user.role !== DISPETCHER,
+                        path: this.$router.resolve({
+                            name: 'RoleTasks',
+                            params: {
+                                userId: this.$store.state.user.uid.toString(),
+                            },
+                        }).href,
+                    },
+                    {
+                        name: 'Мои задачи',
+                        isVisible: () => this.$store.state.user.role !== ADMIN && this.$store.state.user.role !== DISPETCHER,
+                        path: this.$router.resolve({
+                            name: 'InWorkTasks',
+                            params: {
+                                userId: this.$store.state.user.uid.toString(),
+                            },
+                        }).href,
                     },
 
                     // {
