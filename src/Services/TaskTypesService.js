@@ -43,4 +43,26 @@ export default class TaskTypesService {
         })
 
     }
+
+    static async getTaskTypesCascade(company_guid) {
+        return new Promise((resolve, reject) => {
+            TaskTypesService.getTypes(company_guid)
+                .then(response => {
+                    const options = response.map(t => {
+                        return {
+                            label: t.name,
+                            value: t.uid,
+                            children: t.stages.map(s => {
+                                return {
+                                    label: s.name,
+                                    value: s.index,
+                                }
+                            })
+                        }
+                    })
+                    resolve(options)
+                })
+                .catch(reject)
+        })
+    }
 }

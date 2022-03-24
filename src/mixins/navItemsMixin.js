@@ -26,6 +26,26 @@ export default {
                         icon: 'team',
                     },
                     {
+                        path: this.$router.resolve({
+                            name: 'Task',
+                            params: {
+                                userId: this.$store.state.user.uid.toString(),
+                            },
+                        }).href,
+                        isVisible: () => this.$store.state.user.role === 'DnoUL2zTUKYjaLxVTpyk',
+                        name: 'Добавить задачу',
+                    },
+                    {
+                        path: this.$router.resolve({
+                            name: 'Tasks',
+                            params: {
+                                userId: this.$store.state.user.uid.toString(),
+                            },
+                        }).href,
+                        isVisible: () => this.$store.state.user.role === 'DnoUL2zTUKYjaLxVTpyk',
+                        name: 'Задачи',
+                    },
+                    {
                         name: "Справочники",
                         isVisible: () => this.$store.state.user.role === '9hKaI9LIi83WYIcwiyR7',
                         guid: '1',

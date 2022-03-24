@@ -8,7 +8,7 @@ export default class AuthService {
         const user = {...registrationData}
 
         if (!user.role) {
-            user.role = "Администратор"
+            user.role = "9hKaI9LIi83WYIcwiyR7"
         }
 
         return new Promise((resolve, reject) => {
